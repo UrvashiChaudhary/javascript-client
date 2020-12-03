@@ -1,72 +1,70 @@
-.container{
+.container {
     display: flex;
     flex-direction: column;
-    background-color: black;
+    background-color:grey;
     padding: 1px;
     margin: 10%;
     box-shadow: 10px 5px 5px gray;
 }
 
-.block1{
+.block1 {
     flex: 1;
     border: 1px;
-    padding: 0px;
     margin: 1px;
     display: flex;
+    line-height: 30px;
     background-color:white;
-    /* flex-direction: column; */
     justify-content: space-between;
-    /* display: inline; */
 }
 
-.block2{
+.block2 {
     flex: 1;
     display: flex;
     padding: 1px;
     margin: 1px;
+    line-height: 30px;
     background-color: white;
-
 }
+
 ul.breadcrumb li+li:before {
     padding: 8px;
     color: black;
     content: "/\00a0";
-  }
+}
 
-.checkout{
+.checkout {
     flex: 1;
     display: flex;
     margin: 1px;
+    margin-right: 0.2%;
     justify-content: space-between;
-
-    
 }
-.checkout1{
+
+.checkout1 {
     display: inline;
+    flex:5;
 }
 
-.breadcrumb{
-    flex: 5;
+.breadcrumb {
     display:flex;
-
-    margin: auto;
 }
 
-
-.paymentblock{
+.paymentblock {
     display: flex;
     flex: 4;
-    margin-left: 0.5%;
+    margin-left: 0.2%;
     background-color: white;
 }
 
-.cartblock{
+.cartblock {
     display: flex;
     margin-right: 2px;
     background-color: whitesmoke;
     flex: 4;
 }
-.icon{
+
+.icon {
     display: flex;
-    flex: 4;
+    flex: 0;
+    margin: 2px;
 }

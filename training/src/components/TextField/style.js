@@ -1,22 +1,29 @@
-import styled, { css} from 'styled-components';
+
+import styled, { css } from 'styled-components';
+
 const Div = styled.div`
-    padding: 10px;
-    `;
-const Input = styled.input`
-    width:100%;
-    padding: 10px;
-    border: 2px blue
-    ${(props) => props.error
-        && css`
-        border: 1px solid red;
-        color: green;
-        `};
-        `;
-    
+2%;
+`;
 const Error = styled.p`
-    color: red;
-    `;
-
-
-    export { Div, Input, Error };
-    
+color: red;
+`;
+const Input = styled.input`
+width: 100%;
+padding: 0.7%;
+border: 1px solid gray;
+border-radius: 5px;
+color: solid gray;
+${(props) => props.error
+&& css`
+border: 1px solid red;
+color: red;
+`};
+}
+${(props) => (props.value && !props.disabled && !props.error)
+&& css`
+border: 1px solid orange;
+color: black;
+`};
+}
+`;
+export { Div, Error, Input };

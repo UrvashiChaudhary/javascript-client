@@ -17,7 +17,7 @@ body, html{
     border: 1px;
     margin: 1px;
     display: flex;
-    line-height: 30px;
+    line-height: 43px;
     background-color:white;
     justify-content: space-between;
 }
@@ -65,7 +65,7 @@ ul.breadcrumb li+li:before {
     display: flex;
     flex: 6;
     width: 50%;
-    background-color: #eaeaea;flex: 4;
+    background-color: #EFF1F0;flex: 4;
     
 }
 
@@ -134,9 +134,10 @@ div.amt {
 }
 
 .item_image {
-    border: 5px solid grey;
-    width: 65px;
-    height: 65px;
+    border: 5px solid #B2B7B3;
+    padding: 3%;
+    width: 40px;
+    height: 40px;
 }
 
 .amt {
@@ -148,6 +149,7 @@ div.amt {
 .buy {
     margin-left: 1%;
     flex: 1;
+    color: grey;
     text-align: left;
     font-size: 14px;
 }
@@ -156,37 +158,37 @@ div.amt {
     flex: 1;
     font-size: 15px;
     text-align: right;
+    color: grey;
 }
 
 #name,
 #acc {
-    margin-left: 25%;
-    width: 45%;
-    height: 100%;
-    padding: 2%;
+    margin-left: 20%;
+    width: 61%;
+    padding: 3%;
    
 }
 
 #exp {
-    margin-left: 25%;
-    width: 20%;
-    padding: 1%;
+    margin-left: 20%;
+    width: 29%;
+    padding: 3%;
     
 }
 
 #cvv {
     
-    width: 20%;
-    padding: 1%;
-    margin-left: 4%;
+    width: 29%;
+    padding: 3%;
+    margin-left: 2%;
 }
 
 .button {
     color:white;
-    width: 45%;
-    background-color: green;
-    margin-left: 25%;
-    padding: 2%;
+    width: 61%;
+    background-color: #08F763 ;
+    margin-left: 20%;
+    padding: 3%;
 }
 
 summary.buy {

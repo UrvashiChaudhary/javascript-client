@@ -1,43 +1,34 @@
-// import React, { Component } from 'react';
-// import { Input, Error } from './style';
+import React from 'react';
 
-// class TextField extends Component{
-    
-//     render(){
-//         const { disabled, value, error } = this.props; 
-//         if(Error){
-//         return(
-//             <>
-//             <Input type="text" value={ value } disabled={ disabled } error/>
-//             <br></br>
-//             <Error >{ error }</Error> 
-//             </>
-            
-//         )}
-//         else{
-//             return(
-//                 <Input type="text" value={ value } disabled={ disabled } />
-//             )
-//         }
-//     }
-// }
-// export default TextField;
-import React, { Component } from 'react';
-import { Error, Input } from './style'
-class TextField extends Component {
-render() {
-const { value, disabled, error }= this.props;
-if(error){
-return(
-<>
-<Input type="text" value={ value } error/>
-<Error>{error}</Error>
-</>
-)
-}
-return(
-<Input type="text" value={ value } disabled={ disabled } />
-)
-}
-}
+import PropTypes from 'prop-types';
+
+import { Error, Input } from './style';
+
+const TextField = (props) => {
+  const { value, disabled, error } = props;
+  if (error) {
+    return (
+      <>
+        <Input type="text" value={value} error />
+        <Error>{error}</Error>
+      </>
+    );
+  }
+  return (
+    <Input type="text" value={value} disabled={disabled} />
+  );
+};
+
 export default TextField;
+
+TextField.propTypes = {
+  value: PropTypes.string,
+  disabled: PropTypes.string,
+  error: PropTypes.string,
+};
+
+TextField.defaultProps = {
+  value: '',
+  disabled: '',
+  error: '',
+};

@@ -3,7 +3,10 @@ import styled, { css } from 'styled-components';
 const Input = styled.input`
 display: inline;
 ${(props) => props.error
-  && css`
+  && css`Cancel￼Submit
   border: 1px solid red;
   `};`;
-export { Input };
+const Err = styled.p`
+color: red;
+`;
+export { Input, Err };

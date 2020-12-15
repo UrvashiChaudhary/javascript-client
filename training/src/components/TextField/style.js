@@ -15,7 +15,7 @@ color: solid gray;
 ${(props) => props.error
 && css`
 border: 1px solid red;
-color: red;
+color: black;
 `};
 }
 ${(props) => (props.value && !props.disabled && !props.error)

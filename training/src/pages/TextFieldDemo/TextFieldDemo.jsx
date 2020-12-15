@@ -8,7 +8,7 @@ const TextFieldDemo = () => (
   <Div>
     <p><b>This is a Disabled Input</b></p>
     <TextField disabled value="disabled input" />
-    <p><b> A Valid Inpu</b></p>
+    <p><b> A Valid Input</b></p>
     <TextField value="accessible" />
     <p><b>An input with Errors </b></p>
     <TextField error="Could not be more than" value="101" />

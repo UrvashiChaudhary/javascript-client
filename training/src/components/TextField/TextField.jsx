@@ -6,16 +6,11 @@ import { Error, Input } from './style';
 
 const TextField = (props) => {
   const { value, disabled, error } = props;
-  if (error) {
-    return (
-      <>
-        <Input type="text" value={value} error />
-        <Error>{error}</Error>
-      </>
-    );
-  }
   return (
-    <Input type="text" value={value} disabled={disabled} />
+    <>
+      <Input type="text" value={value} disabled={disabled} error={error} />
+      <Error>{error}</Error>
+    </>
   );
 };
 

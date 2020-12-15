@@ -6,15 +6,12 @@ import { Error, Input } from './style';
 
 const TextField = (props) => {
   const { value, disabled, error } = props;
-  const outPut = error ? (
+  return (
     <>
-      <Input type="text" value={value} error />
+      <Input type="text" value={value} disabled={disabled} error={error} />
       <Error>{error}</Error>
     </>
-  ) : (
-    <Input type="text" value={value} disabled={disabled} />
   );
-  return outPut;
 };
 
 export default TextField;

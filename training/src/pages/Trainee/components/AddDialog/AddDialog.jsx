@@ -46,18 +46,18 @@ class AddDialog extends React.Component {
     this.setState({ [key]: value });
   };
 
-  hasError = () => {
+  hasErrors = () => {
     try {
       schema.validateSync(this.state);
     } catch (err) {
       return true;
     }
     return false;
-  }
+  };
 
   getError = (field) => {
     const { touched } = this.state;
-    if (touched[field] && this.hasError()) {
+    if (touched[field] && this.hasErrors()) {
       try {
         schema.validateSyncAt(field, this.state);
         return '';
@@ -66,7 +66,7 @@ class AddDialog extends React.Component {
       }
     }
     return '';
-  }
+  };
 
   isTouched = (field) => {
     const { touched } = this.state;
@@ -106,7 +106,7 @@ class AddDialog extends React.Component {
     return (
       <>
         <Dialog open={open} onClose={onClose} aria-labelledby="form-dialog-title">
-          <DialogTitle> Add Trainee </DialogTitle>
+          <DialogTitle id="form-dialog-title"> Add Trainee </DialogTitle>
           <DialogContent>
             <DialogContentText>
               Enter your trainee Details
@@ -131,7 +131,7 @@ class AddDialog extends React.Component {
               &nbsp;
             <div align="right">
               <Button onClick={onClose} color="primary"> CANCEL</Button>
-              <Button color="primary" disabled={this.hasError} onClick={() => onSubmit({ name, email, password })}>SUBMIT</Button>
+              <Button color="primary" disabled={this.hasErrors()} onClick={() => onSubmit({ name, email, password })}>SUBMIT</Button>
             </div>
           </DialogContent>
         </Dialog>

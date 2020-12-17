@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Img from './style';
@@ -35,19 +36,27 @@ class Slider extends Component {
     const {
       altText, height, duration, banner, defaultbanner,
     } = this.props;
-    if (current === -1 || banner.length === 0) {
-      return (
-        <>
-          <div align="center">
-            <Img src={`${PUBLIC_IMAGE_FOLDER}${defaultbanner}`} alt={altText} height={height} duration={duration} />
-          </div>
-        </>
-      );
-    }
+    // if (current === -1 || banner.length === 0) {
+    //   return (
+    //     <>
+    //       <div align="center">
+    //         <Img src={`${PUBLIC_IMAGE_FOLDER}${defaultbanner}`} alt={altText} height={height} duration={duration} />
+    //       </div>
+    //     </>
+    //   );
+    // }
+    // return (
+    //   <>
+    //     <div align="center">
+    //       <Img src={`${PUBLIC_IMAGE_FOLDER}${banner[current]}`} alt={altText} height={height} duration={duration} />
+    //     </div>
+    //   </>
+    // );
+    const image = (current === -1 || banner.length === 0) ? `${PUBLIC_IMAGE_FOLDER}${defaultbanner}` : `${PUBLIC_IMAGE_FOLDER}${banner[current]}`;
     return (
       <>
         <div align="center">
-          <Img src={`${PUBLIC_IMAGE_FOLDER}${banner[current]}`} alt={altText} height={height} duration={duration} />
+          <Img src={image} alt={altText} height={height} duration={duration} />
         </div>
       </>
     );

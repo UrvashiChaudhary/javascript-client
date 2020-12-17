@@ -34,10 +34,10 @@ class Slider extends Component {
   render() {
     const { current } = this.state;
     const {
-      altText, height, duration, banner, defaultbanner,
+      altText, height, duration, banner, defaultBanner,
     } = this.props;
 
-    const image = (current === -1 || banner.length === 0) ? `${PUBLIC_IMAGE_FOLDER}${defaultbanner}` : `${PUBLIC_IMAGE_FOLDER}${banner[current]}`;
+    const image = (current === -1 || banner.length === 0) ? `${PUBLIC_IMAGE_FOLDER}${defaultBanner}` : `${PUBLIC_IMAGE_FOLDER}${banner[current]}`;
     return (
       <>
         <div align="center">

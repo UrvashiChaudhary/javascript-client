@@ -33,9 +33,8 @@ class Slider extends Component {
   render() {
     const { current } = this.state;
     const {
-      altText, height, duration, banner,
+      altText, height, duration, banner, defaultbanner,
     } = this.props;
-    const { defaultbanner } = this.props;
     if (current === -1 || banner.length === 0) {
       return (
         <>

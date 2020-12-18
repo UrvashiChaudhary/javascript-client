@@ -1,9 +1,11 @@
 // import { render } from '@testing-library/react';
 import React from 'react';
-import { Login } from './pages/Login';
+import { Trainee } from './pages';
 
 const App = () => (
-  <Login />
-);
+  <>
+    <Trainee />
+  </>
 
+);
 export default App;

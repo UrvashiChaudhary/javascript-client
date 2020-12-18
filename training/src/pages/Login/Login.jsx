@@ -5,6 +5,8 @@ import {
   TextField, Typography, CardContent, InputAdornment, Button, Avatar, Card, CssBaseline, withStyles,
 } from '@material-ui/core';
 import { LockOutlined } from '@material-ui/icons';
+import { schema } from '../../config/constants'
+import { Email, VisibilityOff } from '@material-ui/icons';
 
 const Design = (theme) => ({
   icon: {
@@ -71,38 +73,71 @@ class Login extends React.Component {
     const { classes } = this.props;
     return (
       <>
-        <div className={classes.main}>
-        <CssBaseline />
-        <Card open aria-labelledby="form-dialog-title">
-          <Avatar className={classes.icon}>
-          <LockOutlined />
-          </Avatar>
-          <Typography variant="h3" align="center">Login</Typography>
-          <CardContent>
-            <form>
-              <TextField
-              helperText={this.getError('email')}
-              error={!!this.getError('email')}
-              required
-              id="outlined required"
-              label="Email Address"
-              defaultValue=""
-              variant="outlined"
-              fullWidth
-              onChange={this.handleChange('email')}
-              onBlur={() => this.isTouched('email')}
-              />
-            </form>
-          </CardContent>
-        </Card>
-        </div>
-      </>
-    );
-  }
+         <div className={classes.main}>
+            <CssBaseline />
+            <Card open aria-labelledby="form-dialog-title">
+              <Avatar className={classes.icon}>
+                <LockOutlined />
+              </Avatar>
+              <Typography variant="h3" align="center">Login</Typography>
+              <CardContent>
+                <form>
+                  <div>
+                    <TextField
+                      helperText={this.getError('email')}
+                      error={!!this.getError('email')}
+                      required
+                      id="outlined-required"
+                      label="Email Address"
+                      defaultValue=" "
+                      variant="outlined"
+                      fullWidth
+                      onChange={this.handleChange('email')}
+                      onBlur={() => this.isTouched('email')}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <Email />
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                  </div>
+              &nbsp;
+                  <div>
+                    <TextField
+                      type="password"
+                      helperText={this.getError('password')}
+                      error={!!this.getError('password')}
+                      required
+                      id="outlined-required"
+                      label="Password"
+                      variant="outlined"
+                      fullWidth
+                      onChange={this.handleChange('password')}
+                      onBlur={() => this.isTouched('password')}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <VisibilityOff />
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                  </div>
+              &nbsp;
+                  <div>
+                    <Button variant="contained" color="primary" disabled={this.hasErrors()} fullWidth>SIGN IN</Button>
+                  </div>
+                </form>
+              </CardContent>
+            </Card>
+          </div>
+        </>
+      );
+    }
 }
-
-export default withStyles(Design)(Login);
-
 Login.propTypes = {
   classes: PropTypes.objectOf(PropTypes.string).isRequired,
-}
+};
+export default withStyles(Design)(Login);

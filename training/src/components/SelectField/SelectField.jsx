@@ -1,10 +1,8 @@
 import React from 'react';
-
 import PropTypes from 'prop-types';
-
 import { Select } from './style';
 
-function SelectField(props) {
+const SelectField = (props) => {
   const {
     error, onChange, options, defaultText,
   } = props;
@@ -19,7 +17,7 @@ function SelectField(props) {
       </Select>
     </>
   );
-}
+};
 export default SelectField;
 SelectField.propTypes = {
   error: PropTypes.string,

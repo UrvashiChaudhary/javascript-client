@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Input } from './style';
 
-export default function RadioField(props) {
+const RadioField = (props) => {
   const {
     error, onChange, options,
   } = props;
@@ -17,7 +17,8 @@ export default function RadioField(props) {
       ))}
     </>
   );
-}
+};
+export default RadioField;
 RadioField.propTypes = {
   error: PropTypes.string,
   onChange: PropTypes.func.isRequired,

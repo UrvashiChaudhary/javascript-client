@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Img from './style';
@@ -51,7 +50,7 @@ export default Slider;
 Slider.propTypes = {
   altText: PropTypes.string,
   banner: PropTypes.arrayOf(PropTypes.string),
-  defaultbanner: PropTypes.string,
+  defaultBanner: PropTypes.string,
   duration: PropTypes.number,
   height: PropTypes.number,
   random: PropTypes.bool,
@@ -59,7 +58,7 @@ Slider.propTypes = {
 Slider.defaultProps = {
   altText: 'default banner',
   banner: [],
-  defaultbanner: DEFAULT_BANNER_IMAGE,
+  defaultBanner: DEFAULT_BANNER_IMAGE,
   duration: 2000,
   height: 200,
   random: false,

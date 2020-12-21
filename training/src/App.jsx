@@ -1,8 +1,8 @@
 // import { render } from '@testing-library/react';
 import React from 'react';
-import { TextFieldDemo } from './pages';
+import { InputDemo } from './pages/InputDemo';
 
 const App = () => (
-  <TextFieldDemo />
+  <InputDemo />
 );
 export default App;

@@ -1,20 +1,24 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
 import {
-  AppBar, Toolbar, Typography, CssBaseline, Button, withStyles,
+  AppBar, Toolbar, Typography, CssBaseline, Button,
 } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
-const style = () => ({
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
   title: {
     flexGrow: 1,
   },
-  logout: {
-    flexGrow: 0.05,
-  },
-});
+}));
 
-function NavBar(props) {
-  const { classes } = props;
+function NavBar() {
+  const { classes } = useStyles();
   return (
     <>
       <CssBaseline />
@@ -23,17 +27,14 @@ function NavBar(props) {
           <Typography variant="h6" className={classes.title}>
             Trainee Portal
           </Typography>
-          <Button color="inherit">TRAINEE</Button>
-          <Button color="inherit">TEXTFIELD DEMO</Button>
-          <Button color="inherit">INPUT DEMO</Button>
-          <Button color="inherit">CHILDREN DEMO</Button>
+          <Button component={Link} to="/Trainee" color="inherit">TRAINEE</Button>
+          <Button component={Link} to="/TextFieldDemo" color="inherit">TEXTFIELD DEMO</Button>
+          <Button component={Link} to="/InputDemo" color="inherit">INPUT DEMO</Button>
+          <Button component={Link} to="/ChildrenDemo" color="inherit">CHILDREN DEMO</Button>
           <Button color="inherit" className={classes.logout}>LOGOUT</Button>
         </Toolbar>
       </AppBar>
     </>
   );
 }
-NavBar.propTypes = {
-  classes: PropTypes.objectOf(PropTypes.string).isRequired,
-};
-export default withStyles(style)(NavBar);
+export default NavBar;

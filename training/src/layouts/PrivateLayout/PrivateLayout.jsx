@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { NavBar } from '../components/index';
+import { NavBar } from '../components';
 
 // eslint-disable-next-line no-unused-vars
 const PrivateLayout = ({ children, ...rest }) => (
   <div>
+    <NavBar />
     <br />
     <div>{children}</div>
     &nbsp;

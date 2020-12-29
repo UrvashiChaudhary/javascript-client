@@ -4,6 +4,9 @@
 /node_modules
 /.pnp
 .pnp.js
+training/.eslintcache
+package-lock.json
+.eslintcache
 
 # testing
 /coverage

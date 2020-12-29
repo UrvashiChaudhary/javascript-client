@@ -33,22 +33,14 @@ class Slider extends Component {
   render() {
     const { current } = this.state;
     const {
-      altText, height, duration, banner,
+      altText, height, duration, banner, defaultBanner,
     } = this.props;
-    const { defaultbanner } = this.props;
-    if (current === -1 || banner.length === 0) {
-      return (
-        <>
-          <div align="center">
-            <Img src={`${PUBLIC_IMAGE_FOLDER}${defaultbanner}`} alt={altText} height={height} duration={duration} />
-          </div>
-        </>
-      );
-    }
+
+    const image = (current === -1 || banner.length === 0) ? `${PUBLIC_IMAGE_FOLDER}${defaultBanner}` : `${PUBLIC_IMAGE_FOLDER}${banner[current]}`;
     return (
       <>
         <div align="center">
-          <Img src={`${PUBLIC_IMAGE_FOLDER}${banner[current]}`} alt={altText} height={height} duration={duration} />
+          <Img src={image} alt={altText} height={height} duration={duration} />
         </div>
       </>
     );
@@ -58,7 +50,7 @@ export default Slider;
 Slider.propTypes = {
   altText: PropTypes.string,
   banner: PropTypes.arrayOf(PropTypes.string),
-  defaultbanner: PropTypes.string,
+  defaultBanner: PropTypes.string,
   duration: PropTypes.number,
   height: PropTypes.number,
   random: PropTypes.bool,
@@ -66,7 +58,7 @@ Slider.propTypes = {
 Slider.defaultProps = {
   altText: 'default banner',
   banner: [],
-  defaultbanner: DEFAULT_BANNER_IMAGE,
+  defaultBanner: DEFAULT_BANNER_IMAGE,
   duration: 2000,
   height: 200,
   random: false,

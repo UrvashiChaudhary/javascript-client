@@ -5,3 +5,5 @@ export { Slider } from './Slider';
 export { RadioField } from './RadioField';
 
 export { SelectField } from './SelectField';
+
+export { ButtonField } from './Button';

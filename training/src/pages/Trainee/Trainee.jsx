@@ -15,25 +15,17 @@ export default class Trainee extends React.Component {
   };
 
   handleClose = () => {
-    const { open } = this.state;
     this.setState({ open: false });
-    return open;
   };
-
-  handleSubmit = (data) => {
-    this.setState({
-      open: false,
-    }, () => {
-      console.log(data);
-    });
-  }
 
   render() {
     const { open } = this.state;
     return (
       <>
         <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>ADD TRAINEE</Button>
-        <AddDialog open={open} onClose={this.handleClose} onSubmit={() => this.handleSubmit} />
+        <Button>
+          <AddDialog open={open} onSubmit={this.handleClose} onClose={this.handleClose} />
+        </Button>
       </>
     );
   }

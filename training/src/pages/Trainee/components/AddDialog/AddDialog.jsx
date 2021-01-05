@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -6,6 +7,7 @@ import {
 import { Email, Person, VisibilityOff } from '@material-ui/icons';
 import { withStyles } from '@material-ui/core/styles';
 import schema from './Schema';
+import { snackbarContext } from '../../../../contexts/index';
 import Handler from './Handler';
 
 const passwordStyle = () => ({
@@ -89,8 +91,7 @@ class AddDialog extends React.Component {
     const {
       open, onClose, onSubmit, classes,
     } = this.props;
-
-    const { name, email, password } = this.state;
+    const { Name, Password } = this.state;
     const ans = [];
     Object.keys(constant).forEach((key) => {
       ans.push(<Handler
@@ -111,27 +112,24 @@ class AddDialog extends React.Component {
             <DialogContentText>
               Enter your trainee Details
             </DialogContentText>
-            <div>
-              {ans[0]}
-            </div>
-              &nbsp;
-            <div>
-              {ans[1]}
-            </div>
-              &nbsp;
+            <div>{ans[0]}</div>
+            <br />
+            <div>{ans[1]}</div>
+            <br />
             <div className={classes.passfield}>
-              <div className={classes.pass}>
-                {ans[2]}
-              </div>
-              &nbsp;
-              <div className={classes.pass}>
-                {ans[3]}
-              </div>
+              <div className={classes.pass}>{ans[2]}</div>
+              <br />
+              <br />
+              <div className={classes.pass}>{ans[3]}</div>
             </div>
-              &nbsp;
+            <br />
             <div align="right">
-              <Button onClick={onClose} color="primary"> CANCEL</Button>
-              <Button color="primary" disabled={this.hasErrors()} onClick={() => onSubmit({ name, email, password })}>SUBMIT</Button>
+              <Button onClick={onClose} color="primary">CANCEL</Button>
+              <snackbarContext.Consumer>
+                {(value) => (
+                  <Button variant="contained" color="primary" disabled={this.hasErrors()} onClick={() => onSubmit()({ Name, Email, Password })}>SUBMIT</Button>
+                )}
+              </snackbarContext.Consumer>
             </div>
           </DialogContent>
         </Dialog>
@@ -139,7 +137,6 @@ class AddDialog extends React.Component {
     );
   }
 }
-
 export default withStyles(passwordStyle)(AddDialog);
 
 AddDialog.propTypes = {

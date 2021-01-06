@@ -4,6 +4,7 @@ import {
   AppBar, Toolbar, Typography, CssBaseline, Button,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import localStorage from 'local-storage';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,6 +17,10 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
 }));
+
+const handleLogout = () => {
+  localStorage.remove();
+};
 
 function NavBar() {
   const classes = useStyles();
@@ -32,7 +37,7 @@ function NavBar() {
             <Button component={Link} to="/TextFieldDemo" color="inherit">TEXTFIELD DEMO</Button>
             <Button component={Link} to="/InputDemo" color="inherit">INPUT DEMO</Button>
             <Button component={Link} to="/ChildrenDemo" color="inherit">CHILDREN DEMO</Button>
-            <Button color="inherit" className={classes.logout}>LOGOUT</Button>
+            <Button color="inherit" href="/login" onClick={() => handleLogout()}>LOGOUT</Button>
           </Toolbar>
         </AppBar>
       </div>

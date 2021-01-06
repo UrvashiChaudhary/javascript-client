@@ -3,10 +3,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   TextField, Typography, CardContent, InputAdornment, Button, Avatar, Card, CssBaseline, withStyles,
+  CircularProgress,
 } from '@material-ui/core';
 import { LockOutlined } from '@material-ui/icons';
+import localStorage from 'local-storage';
+import { Redirect } from 'react-router-dom';
 import { schema } from '../../config/constants'
 import { Email, VisibilityOff } from '@material-ui/icons';
+import callApi from '../../libs/utils/api';
+import { snackbarContext } from '../../contexts/index';
 
 const Design = (theme) => ({
   icon: {
@@ -25,6 +30,9 @@ class Login extends React.Component {
   constructor(props){
     super(props);
     this.state = {
+      loader: false,
+      disabled: true,
+      redirect: false,
       email: '',
       password: '',
       touched: {
@@ -69,8 +77,38 @@ class Login extends React.Component {
       });
     }
 
+    onClickHandler = async (value) => {
+      const { email, password } = this.state;
+      await this.setState({
+        disabled: true,
+        loader: true,
+      });
+      await callApi('post', '/user/login/', { email, password }, value);
+      console.log('call api', email, password);
+      this.setState({
+        disabled: false,
+        loader: false,
+      });
+      console.log('after call api');
+      if (localStorage.get('token')) {
+        console.log('in if call api');
+        this.setState({
+          redirect: true,
+        });
+      }
+    };
+
+    renderRedirect = () => {
+      const { redirect } = this.state;
+      if (redirect) {
+        return <Redirect to="/trainee" />;
+      }
+    };
+
   render() {
     const { classes } = this.props;
+    const { loader } = this.state;
+
     return (
       <>
          <div className={classes.main}>
@@ -103,7 +141,8 @@ class Login extends React.Component {
                       }}
                     />
                   </div>
-              &nbsp;
+              <br />
+
                   <div>
                     <TextField
                       type="password"
@@ -127,7 +166,15 @@ class Login extends React.Component {
                   </div>
               &nbsp;
                   <div>
-                    <Button variant="contained" color="primary" disabled={this.hasErrors()} fullWidth>SIGN IN</Button>
+                  <snackbarContext.Consumer>
+                    {(value) => (
+                      <Button variant="contained" color="primary" onClick={() => this.onClickHandler(value)} disabled={this.hasErrors()} fullWidth>
+                        {this.renderRedirect()}
+                        <span>{loader ? <CircularProgress size={20} /> : ''}</span>
+                        SIGN IN
+                      </Button>
+                    )}
+                  </snackbarContext.Consumer>
                   </div>
                 </form>
               </CardContent>

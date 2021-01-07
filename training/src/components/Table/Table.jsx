@@ -25,8 +25,13 @@ function Table(props) {
         <TableHead>
           <TableRow>
             {
-              column.map(({ align, label, field }) => (
-                <TableCell className={classes.header} align={align}>{label || field}</TableCell>
+              column.map((Data) => (
+                <TableCell
+                  className={classes.header}
+                  align={Data.align}
+                >
+                  {Data.label || Data.field}
+                </TableCell>
               ))
             }
           </TableRow>

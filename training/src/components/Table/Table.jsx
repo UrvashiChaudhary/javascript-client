@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Table, TableCell, TableContainer, TableHead, TableRow, Paper, withStyles, TableBody,
+  Table as Tables, TableCell, TableContainer, TableHead, TableRow, Paper, withStyles, TableBody,
 } from '@material-ui/core';
 
 const useStyles = () => ({
@@ -14,17 +14,19 @@ const useStyles = () => ({
 
 });
 
-function TableComponent(props) {
-  const { classes, data, column } = props;
+function Table(props) {
+  const {
+    classes, data, column,
+  } = props;
 
   return (
     <TableContainer component={Paper}>
-      <Table className={classes.table}>
+      <Tables className={classes.table}>
         <TableHead>
           <TableRow>
             {
-              column.map(({ align, label }) => (
-                <TableCell className={classes.header} align={align}>{label}</TableCell>
+              column.map(({ align, label, field }) => (
+                <TableCell className={classes.header} align={align}>{label || field}</TableCell>
               ))
             }
           </TableRow>
@@ -39,13 +41,13 @@ function TableComponent(props) {
             </TableRow>
           ))}
         </TableBody>
-      </Table>
+      </Tables>
     </TableContainer>
   );
 }
-TableComponent.propTypes = {
+Table.propTypes = {
   classes: PropTypes.objectOf(PropTypes.string).isRequired,
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
   column: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
-export default withStyles(useStyles)(TableComponent);
+export default withStyles(useStyles)(Table);

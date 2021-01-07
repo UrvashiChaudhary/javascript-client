@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Button, withStyles } from '@material-ui/core';
 import { AddDialog } from './components/index';
-import { TableComponent } from '../../components';
+import { Table } from '../../components';
 import trainees from './Data/trainee';
 
 const useStyles = (theme) => ({
@@ -54,19 +54,20 @@ class TraineeList extends React.Component {
             </Button>
             <AddDialog open={open} onClose={this.handleClose} onSubmit={() => this.handleSubmit} />
           </div>
-          <TableComponent
+          <Table
             id="id"
             data={trainees}
             column={
               [
                 {
-                  field: 'name',
+                  field: 'Name',
                   label: 'Name',
                   align: 'center',
                 },
                 {
-                  field: 'email',
+                  field: 'Email Address',
                   label: 'Email Address',
+                  align: 'left',
                 },
               ]
             }

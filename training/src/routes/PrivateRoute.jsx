@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Redirect, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { PrivateLayout } from '../layouts';
 
@@ -8,9 +8,14 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={(matchProps) => (
-      <PrivateLayout>
-        <Component {...matchProps} />
-      </PrivateLayout>
+      localStorage.getItem('token')
+        ? (
+          <PrivateLayout>
+            <Component {...matchProps} />
+          </PrivateLayout>
+        ) : (
+          <Redirect to="/login/" />
+        )
     )}
   />
 );

@@ -60,12 +60,12 @@ class TraineeList extends React.Component {
             column={
               [
                 {
-                  field: 'Name',
+                  field: 'name',
                   label: 'Name',
                   align: 'center',
                 },
                 {
-                  field: 'Email Address',
+                  field: 'email address',
                   label: 'Email Address',
                 },
               ]

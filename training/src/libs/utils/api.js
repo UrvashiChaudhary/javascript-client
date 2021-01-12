@@ -1,7 +1,7 @@
 /* eslint-disable */
 import axios from 'axios';
 
-export default async function callApi(method, url, data) {
+export default async function callApi(data, method, url) {
   const mainUrl = 'http://localhost:9000/api' + url;
   console.log('main url is', mainUrl);
   try {
@@ -9,10 +9,11 @@ export default async function callApi(method, url, data) {
       method,
       url: mainUrl,
       data,
-      headers: { Authorization: window.localStorage.getItem('token') },
+      headers: { authorization: window.localStorage.getItem('token') },
     });
     return response;
   } catch (err) {
-    console.log('error', err);
+    return { status: 'error', message: 'This is a error message' };
+
   }
 }

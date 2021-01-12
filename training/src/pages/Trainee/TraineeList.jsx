@@ -6,6 +6,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { AddDialog, EditDialog, DeleteDialog } from './components/index';
 import { TableComponent } from '../../components';
+import callApi from '../../libs/utils/api';
 import { trainees } from './Data/trainee';
 
 const useStyles = (theme) => ({
@@ -30,6 +31,9 @@ class TraineeList extends React.Component {
       deleteData: {},
       page: 0,
       rowsPerPage: 10,
+      loading: false,
+      Count: 0,
+      dataObj: [],
     };
   }
 
@@ -41,6 +45,14 @@ class TraineeList extends React.Component {
     const { open } = this.state;
     this.setState({ open: false });
     return open;
+  };
+
+  handleChangeRowsPerPage = (event) => {
+    this.setState({
+      rowsPerPage: event.target.value,
+      page: 0,
+
+    });
   };
 
   handleSubmit = (data, value) => {
@@ -68,6 +80,7 @@ class TraineeList extends React.Component {
   };
 
   handleChangePage = (event, newPage) => {
+    this.componentDidMount(newPage);
     this.setState({
       page: newPage,
     });
@@ -137,9 +150,32 @@ class TraineeList extends React.Component {
     });
   };
 
+  componentDidMount = () => {
+    this.setState({ loading: true });
+    // eslint-disable-next-line consistent-return
+    callApi({ }, 'get', `/trainee?skip=${0}&limit=${20}`).then((response) => {
+      this.setState({ dataObj: response.data.record, loading: false, Count: 100 });
+
+      if (response.data.status !== 200) {
+        this.setState({
+          loading: false,
+          Count: 100,
+
+        }, () => {
+          console.log('call Api');
+        });
+      } else {
+        this.setState({ dataObj: trainees, loading: false, Count: 100 });
+        return response;
+      }
+    });
+  }
+
   render() {
     const {
-      open, order, orderBy, page, rowsPerPage, EditOpen, RemoveOpen, editData,
+      open, order, orderBy, page,
+      rowsPerPage, EditOpen, RemoveOpen, editData,
+      loading, dataObj, Count,
     } = this.state;
     const { classes } = this.props;
     return (
@@ -168,8 +204,9 @@ class TraineeList extends React.Component {
           <br />
           <br />
           <TableComponent
+            loader={loading}
             id="id"
-            data={trainees}
+            data={dataObj}
             column={
               [
                 {
@@ -204,9 +241,10 @@ class TraineeList extends React.Component {
             orderBy={orderBy}
             order={order}
             onSelect={this.handleSelect}
-            count={100}
+            count={Count}
             page={page}
             onChangePage={this.handleChangePage}
+            onChangeRowsPerPage={this.handleChangeRowsPerPage}
             rowsPerPage={rowsPerPage}
           />
         </div>

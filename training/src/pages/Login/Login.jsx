@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -45,6 +44,7 @@ class Login extends React.Component {
     if (redirect) {
       return <Redirect to="/trainee" />;
     }
+    return '';
   };
 
   handleChange = (key) => ({ target: { value } }) => {
@@ -70,6 +70,7 @@ class Login extends React.Component {
           return err.message;
         }
       }
+      return '';
     };
 
     isTouched = (field) => {
@@ -88,8 +89,7 @@ class Login extends React.Component {
         disabled: true,
         loader: true,
       });
-      const resp = await callApi('post', '/user/login/', { email: email.trim(), password });
-      console.log('resp', resp);
+      const resp = await callApi({ email: email.trim(), password }, 'post', '/user/login/');
       if (resp.data.data && (resp.data.status === 200)) {
         window.localStorage.setItem('token', resp.data.data);
         this.setState({

@@ -64,10 +64,6 @@ class TraineeList extends React.Component {
                   label: 'Name',
                 },
                 {
-                  field: 'na',
-                  label: 'Na',
-                },
-                {
                   field: 'email',
                   label: 'Email Address',
                   format: (value) => value && value.toUpperCase(),

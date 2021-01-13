@@ -2,20 +2,31 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   Table as Tables, TableCell, TableContainer, TableHead, TableRow, Paper, withStyles, TableBody,
+  TableSortLabel,
 } from '@material-ui/core';
 
-const useStyles = () => ({
+const useStyles = (theme) => ({
   table: {
     minWidth: 650,
   },
   header: {
     color: 'grey',
   },
+  root: {
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.action.hover,
+    },
+    '&:hover': {
+      backgroundColor: 'rgb(200,200,200)',
+      cursor: 'pointer',
+    },
+  },
 });
 
-function Table(props) {
+const Table = (props) => {
   const {
-    classes, data, column,
+    // eslint-disable-next-line react/prop-types
+    classes, data, column, order, orderBy, onSort, onSelect,
   } = props;
 
   return (
@@ -28,8 +39,15 @@ function Table(props) {
                 <TableCell
                   className={classes.header}
                   align={Data.align}
+                  sortDirection={orderBy === Data.label ? order : false}
                 >
-                  {Data.label || Data.field}
+                  <TableSortLabel
+                    active={orderBy === Data.label}
+                    direction={orderBy === Data.label ? order : 'asc'}
+                    onClick={onSort(Data.label)}
+                  >
+                    {Data.label}
+                  </TableSortLabel>
                 </TableCell>
               ))
             }
@@ -40,6 +58,7 @@ function Table(props) {
             <TableRow
               key={element.id}
               className={classes.root}
+              onMouseEnter={onSelect(element)}
             >
               {column.map(({ field, align, format }) => (
                 <TableCell align={align}>
@@ -54,11 +73,18 @@ function Table(props) {
       </Tables>
     </TableContainer>
   );
-}
+};
 Table.propTypes = {
   classes: PropTypes.objectOf(PropTypes.string).isRequired,
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
   column: PropTypes.arrayOf(PropTypes.object).isRequired,
+  order: PropTypes.string,
+  orderBy: PropTypes.string,
+  onSort: PropTypes.func,
 };
-
+Table.defaultProps = {
+  order: 'asc',
+  orderBy: '',
+  onSort: () => {},
+};
 export default withStyles(useStyles)(Table);

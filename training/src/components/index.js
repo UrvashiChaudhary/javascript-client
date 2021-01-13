@@ -9,3 +9,5 @@ export { SelectField } from './SelectField';
 export { ButtonField } from './Button';
 
 export { Math } from './Math';
+
+export { Table } from './Table';

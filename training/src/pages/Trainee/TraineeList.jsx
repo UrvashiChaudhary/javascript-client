@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, withStyles } from '@material-ui/core';
 import { AddDialog } from './components/index';
-import { TableComponent } from '../../components';
+import { Table } from '../../components';
 import trainees from './Data/trainee';
 
 const useStyles = (theme) => ({
@@ -69,7 +69,7 @@ class TraineeList extends React.Component {
           </div>
           &nbsp;
           &nbsp;
-          <TableComponent
+          <Table
             id="id"
             data={trainees}
             column={

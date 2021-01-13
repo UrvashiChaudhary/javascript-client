@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Select, Err } from './style';
 
-function SelectField(props) {
+const SelectField = (props) => {
   const {
     error, onChange, options, defaultText, onBlur,
   } = props;
@@ -18,7 +18,7 @@ function SelectField(props) {
       <Err>{error}</Err>
     </>
   );
-}
+};
 export default SelectField;
 SelectField.propTypes = {
   error: PropTypes.string,

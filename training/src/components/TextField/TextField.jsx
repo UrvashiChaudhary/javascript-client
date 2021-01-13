@@ -6,16 +6,11 @@ const TextField = (props) => {
   const {
     value, disabled, error, onChange, onBlur,
   } = props;
-  if (error) {
-    return (
-      <>
-        <Input type="text" value={value} error onChange={onChange} onBlur={onBlur} />
-        <Error>{error}</Error>
-      </>
-    );
-  }
   return (
-    <Input type="text" value={value} disabled={disabled} onChange={onChange} onBlur={onBlur} />
+    <>
+      <Input type="text" value={value} error={error} disabled={disabled} onChange={onChange} onBlur={onBlur} />
+      <Error>{error}</Error>
+    </>
   );
 };
 export default TextField;

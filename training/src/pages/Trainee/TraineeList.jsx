@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { Button, withStyles } from '@material-ui/core';
 import { AddDialog } from './components/index';
 import { Table } from '../../components';
@@ -37,14 +36,13 @@ class TraineeList extends React.Component {
     this.setState({
       open: false,
     }, () => {
-      // eslint-disable-next-line no-console
       console.log(data);
     });
   }
 
   render() {
     const { open } = this.state;
-    const { match: { url }, classes } = this.props;
+    const { classes } = this.props;
     return (
       <>
         <div className={classes.root}>
@@ -54,6 +52,8 @@ class TraineeList extends React.Component {
             </Button>
             <AddDialog open={open} onClose={this.handleClose} onSubmit={() => this.handleSubmit} />
           </div>
+          &nbsp;
+          &nbsp;
           <Table
             id="id"
             data={trainees}
@@ -62,31 +62,31 @@ class TraineeList extends React.Component {
                 {
                   field: 'name',
                   label: 'Name',
-                  align: 'center',
                 },
                 {
-                  field: 'email address',
+                  field: 'na',
+                  label: 'Na',
+                },
+                {
+                  field: 'email',
                   label: 'Email Address',
+                  format: (value) => value && value.toUpperCase(),
+                },
+                {
+                  field: 'createdAt',
+                  label: 'Date',
+                  align: 'right',
+                  format: this.getDateFormat,
                 },
               ]
             }
           />
-          <ul>
-            {trainees.map(({ name, id }) => (
-              <li key={id}>
-                <Link to={`${url}/${id}`}>
-                  {name}
-                </Link>
-              </li>
-            ))}
-          </ul>
         </div>
       </>
     );
   }
 }
 TraineeList.propTypes = {
-  match: PropTypes.objectOf(PropTypes.object).isRequired,
   classes: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 export default withStyles(useStyles)(TraineeList);

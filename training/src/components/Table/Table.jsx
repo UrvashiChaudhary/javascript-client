@@ -11,7 +11,6 @@ const useStyles = () => ({
   header: {
     color: 'grey',
   },
-
 });
 
 function Table(props) {
@@ -37,12 +36,18 @@ function Table(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map(({ name, email }) => (
-            <TableRow>
-              <TableCell align={column[0].align}>
-                {name}
-              </TableCell>
-              <TableCell>{email}</TableCell>
+          {data.map((element) => (
+            <TableRow
+              key={element.id}
+              className={classes.root}
+            >
+              {column.map(({ field, align, format }) => (
+                <TableCell align={align}>
+                  {format !== undefined
+                    ? format(element[field])
+                    : element[field]}
+                </TableCell>
+              ))}
             </TableRow>
           ))}
         </TableBody>
@@ -55,4 +60,5 @@ Table.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
   column: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
+
 export default withStyles(useStyles)(Table);

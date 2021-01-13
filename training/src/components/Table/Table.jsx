@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Table, TableCell, TableContainer, TableHead, TableRow, Paper, withStyles, TableBody,
+  Table as Tables, TableCell, TableContainer, TableHead, TableRow, Paper, withStyles, TableBody,
   TableSortLabel,
 } from '@material-ui/core';
 
@@ -23,7 +23,7 @@ const useStyles = (theme) => ({
   },
 });
 
-function TableComponent(props) {
+function Table(props) {
   const {
     // eslint-disable-next-line react/prop-types
     classes, data, column, order, orderBy, onSort, onSelect,
@@ -31,7 +31,7 @@ function TableComponent(props) {
 
   return (
     <TableContainer component={Paper}>
-      <Table className={classes.table}>
+      <Tables className={classes.table}>
         <TableHead>
           <TableRow>
             {
@@ -70,11 +70,11 @@ function TableComponent(props) {
             </TableRow>
           ))}
         </TableBody>
-      </Table>
+      </Tables>
     </TableContainer>
   );
 }
-TableComponent.propTypes = {
+Table.propTypes = {
   classes: PropTypes.objectOf(PropTypes.string).isRequired,
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
   column: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -82,9 +82,9 @@ TableComponent.propTypes = {
   orderBy: PropTypes.string,
   onSort: PropTypes.func,
 };
-TableComponent.defaultProps = {
+Table.defaultProps = {
   order: 'asc',
   orderBy: '',
   onSort: () => {},
 };
-export default withStyles(useStyles)(TableComponent);
+export default withStyles(useStyles)(Table);

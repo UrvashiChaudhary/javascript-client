@@ -67,6 +67,7 @@ class TraineeList extends React.Component {
     this.setState({
       page: newPage,
     });
+    console.log('event', event);
   };
 
   // eslint-disable-next-line no-unused-vars

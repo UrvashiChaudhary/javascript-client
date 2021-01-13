@@ -4,7 +4,7 @@ import { Button, withStyles } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { AddDialog, EditDialog, DeleteDialog } from './components/index';
-import { TableComponent } from '../../components';
+import { Table } from '../../components';
 import trainees from './Data/trainee';
 
 const useStyles = (theme) => ({
@@ -144,7 +144,7 @@ class TraineeList extends React.Component {
           />
           <br />
           <br />
-          <TableComponent
+          <Table
             id="id"
             data={trainees}
             column={

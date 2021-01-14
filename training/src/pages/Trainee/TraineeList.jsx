@@ -177,7 +177,7 @@ class TraineeList extends React.Component {
     const {
       open, order, orderBy, page,
       rowsPerPage, EditOpen, RemoveOpen, editData,
-      loading, dataObj, Count,
+      loading, dataObj, Count, deleteData,
     } = this.state;
     const { classes } = this.props;
     return (
@@ -202,7 +202,7 @@ class TraineeList extends React.Component {
             openRemove={RemoveOpen}
             onClose={this.handleRemoveClose}
             remove={this.handleRemove}
-            rmdata={dataObj}
+            rmdata={deleteData}
           />
           <br />
           <br />

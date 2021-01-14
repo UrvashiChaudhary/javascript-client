@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
 import * as moment from 'moment';
@@ -105,6 +106,7 @@ class TraineeList extends React.Component {
     this.setState({
       RemoveOpen: false,
     });
+    console.log('value trainee', value);
     // eslint-disable-next-line no-console
     console.log('Deleted Item ', deleteData);
     const { createdAt } = deleteData;
@@ -193,13 +195,14 @@ class TraineeList extends React.Component {
             Editopen={EditOpen}
             handleEditClose={this.handleEditClose}
             handleEdit={this.handleEdit}
-            data={editData}
+            data={dataObj}
           />
           <br />
           <DeleteDialog
             openRemove={RemoveOpen}
             onClose={this.handleRemoveClose}
             remove={this.handleRemove}
+            rmdata={dataObj}
           />
           <br />
           <br />

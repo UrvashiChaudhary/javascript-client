@@ -54,9 +54,8 @@ class TraineeList extends React.Component {
     console.log(event);
   };
 
-  handleSort = (field) => (event) => {
+  handleSort = (field) => () => {
     const { order } = this.state;
-    console.log(event);
     this.setState({
       orderBy: field,
       order: order === 'asc' ? 'desc' : 'asc',
@@ -67,11 +66,10 @@ class TraineeList extends React.Component {
     this.setState({
       page: newPage,
     });
-    console.log('event', event);
   };
 
   // eslint-disable-next-line no-unused-vars
-  handleRemoveDialogOpen = (element) => (event) => {
+  handleRemoveDialogOpen = (element) => () => {
     this.setState({
       RemoveOpen: true,
       deleteData: element,

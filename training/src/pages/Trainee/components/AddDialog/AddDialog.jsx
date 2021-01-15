@@ -21,20 +21,20 @@ const passwordStyle = () => ({
 });
 
 const constant = {
-  Name: Person,
-  'Email Id': Email,
-  Password: VisibilityOff,
-  'Confirm Password': VisibilityOff,
+  name: Person,
+  email: Email,
+  password: VisibilityOff,
+  confirmPassword: VisibilityOff,
 };
 
 class AddDialog extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      Name: '',
-      Email: '',
-      Password: '',
-      ConfirmPassword: '',
+      name: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
       touched: {
         name: false,
         email: false,
@@ -80,13 +80,6 @@ class AddDialog extends React.Component {
     });
   }
 
-  passwordType = (key) => {
-    if (key === 'Password' || key === 'Confirm Password') {
-      return 'password';
-    }
-    return '';
-  }
-
   render() {
     const {
       open, onClose, onSubmit, classes,
@@ -101,7 +94,7 @@ class AddDialog extends React.Component {
         helperText={this.getError(key)}
         error={!!this.getError(key)}
         icons={constant[key]}
-        type={this.passwordType(key)}
+        type={(key === 'password' || key === 'confirmPassword') ? 'password' : ''}
       />);
     });
     return (
@@ -127,7 +120,13 @@ class AddDialog extends React.Component {
               <Button onClick={onClose} color="primary">CANCEL</Button>
               <snackbarContext.Consumer>
                 {(value) => (
-                  <Button variant="contained" color="primary" disabled={this.hasErrors()} onClick={() => onSubmit()({ Name, Email, Password })}>SUBMIT</Button>
+                  <Button variant="contained"
+                  color="primary"
+                  disabled={this.hasErrors()}
+                  onClick={() => {onSubmit()({ Name, Email, Password });
+                  value('This is a successfully added trainee message ! ', 'success');
+                }
+                }>SUBMIT</Button>
                 )}
               </snackbarContext.Consumer>
             </div>

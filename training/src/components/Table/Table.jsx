@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Table, TableCell, TableContainer, TableHead, TableRow, Paper, withStyles, TableBody,
+  Table as Tables, TableCell, TableContainer, TableHead, TableRow, Paper, withStyles, TableBody,
   TableSortLabel, TablePagination, IconButton,
 } from '@material-ui/core';
 
@@ -24,7 +24,7 @@ const useStyles = (theme) => ({
   },
 });
 
-function TableComponent(props) {
+const Table = (props) => {
   const {
     // eslint-disable-next-line react/prop-types
     classes, data, column, order, orderBy, onSort, onSelect, count, page, actions,
@@ -33,7 +33,7 @@ function TableComponent(props) {
 
   return (
     <TableContainer component={Paper}>
-      <Table className={classes.table}>
+      <Tables className={classes.table}>
         <TableHead>
           <TableRow>
             {
@@ -77,8 +77,10 @@ function TableComponent(props) {
             </TableRow>
           ))}
         </TableBody>
-      </Table>
-      <TablePagination
+      </Tables>
+      {
+        count ? (
+          <TablePagination
         component="div"
         rowsPerPageOptions={0}
         count={count}
@@ -86,10 +88,13 @@ function TableComponent(props) {
         page={page}
         onChangePage={onChangePage}
       />
+        ) : ''
+
+}
     </TableContainer>
   );
-}
-TableComponent.propTypes = {
+};
+Table.propTypes = {
   classes: PropTypes.objectOf(PropTypes.string).isRequired,
   data: PropTypes.objectOf(PropTypes.object).isRequired,
   column: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -103,9 +108,9 @@ TableComponent.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
   onSelect: PropTypes.func.isRequired,
 };
-TableComponent.defaultProps = {
+Table.defaultProps = {
   order: 'asc',
   orderBy: '',
   onSort: () => {},
 };
-export default withStyles(useStyles)(TableComponent);
+export default withStyles(useStyles)(Table);

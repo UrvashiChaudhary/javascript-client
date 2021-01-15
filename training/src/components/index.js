@@ -10,4 +10,4 @@ export { ButtonField } from './Button';
 
 export { Math } from './Math';
 
-export { Table } from './Table';
+export { Table } from './Table/index';

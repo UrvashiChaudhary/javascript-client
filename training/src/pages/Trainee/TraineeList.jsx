@@ -195,7 +195,7 @@ class TraineeList extends React.Component {
             Editopen={EditOpen}
             handleEditClose={this.handleEditClose}
             handleEdit={this.handleEdit}
-            data={dataObj}
+            data={editData}
           />
           <br />
           <DeleteDialog

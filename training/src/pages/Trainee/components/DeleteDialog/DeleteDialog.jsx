@@ -9,6 +9,7 @@ import {
   DialogTitle,
   Button,
 } from '@material-ui/core';
+import { snackbarContext } from '../../../../contexts/index';
 
 const useStyles = () => ({
   button_color: {
@@ -40,9 +41,14 @@ function DeleteDialog(props) {
           <Button onClick={onClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={remove} color="primary" autoFocus className={classes.button_color}>
-            Delete
-          </Button>
+          <snackbarContext.Consumer>
+            {(value) => (
+              <Button onClick={() => remove(value)} color="primary" autoFocus className={classes.button_color}>
+                Delete
+                {/* onClick={remove} */}
+              </Button>
+            )}
+          </snackbarContext.Consumer>
         </DialogActions>
       </Dialog>
     </div>

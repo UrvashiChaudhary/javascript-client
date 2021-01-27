@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -7,7 +8,6 @@ import {
 import { Redirect } from 'react-router-dom';
 import { Email, VisibilityOff, LockOutlined } from '@material-ui/icons';
 import { schema } from '../../config/constants';
-import callApi from '../../libs/utils/api';
 import { snackbarContext } from '../../contexts/index';
 
 const Design = (theme) => ({
@@ -85,28 +85,33 @@ class Login extends React.Component {
 
     onClickHandler = async (value) => {
       const { email, password } = this.state;
+      const { loginUser } = this.props;
+      console.log('loginUser', loginUser);
       await this.setState({
         disabled: true,
         loader: true,
       });
-      const resp = await callApi({ email: email.trim(), password }, 'post', '/user/login/');
-      if (resp.data.data && (resp.data.status === 200)) {
-        window.localStorage.setItem('token', resp.data.data);
-        this.setState({
-          redirect: true,
-          message: 'Successfully Login',
-        }, () => {
-          const { message } = this.state;
-          value(message, 'success');
-        });
-      } else {
-        this.setState({
-          message: 'Email not Registered',
-        }, () => {
-          const { message } = this.state;
-          value(message, 'error');
-        });
-      }
+      console.log('----------------------------');
+      // const resp = await callApi({ email: email.trim(), password }, 'post', '/user/login/');
+      const resp = await loginUser({ variables: { email, password } });
+      console.log('respppppp', resp);
+      // if (resp.data.data && (resp.data.status === 200)) {
+      //   window.localStorage.setItem('token', resp.data.data);
+      //   this.setState({
+      //     redirect: true,
+      //     message: 'Successfully Login',
+      //   }, () => {
+      //     const { message } = this.state;
+      //     value(message, 'success');
+      //   });
+      // } else {
+      //   this.setState({
+      //     message: 'Email not Registered',
+      //   }, () => {
+      //     const { message } = this.state;
+      //     value(JSON.stringify(message), 'error');
+      //   });
+      // }
     };
 
     render() {
@@ -189,5 +194,6 @@ class Login extends React.Component {
 }
 Login.propTypes = {
   classes: PropTypes.objectOf(PropTypes.string).isRequired,
+  loginUser: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 export default withStyles(Design)(Login);

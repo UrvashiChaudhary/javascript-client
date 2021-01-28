@@ -9,12 +9,11 @@ const link = new HttpLink({ uri: 'http://localhost:9001/graphql' });
 const authLink = setContext((_, { headers }) => {
 // get the authentication token if it's exists
   const token = localStorage.getItem('token');
-  console.log('token', token);
   // return the headers to the context so httplink can read them
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : '',
+      authorization: token ? `${token}` : '',
     },
   };
 });

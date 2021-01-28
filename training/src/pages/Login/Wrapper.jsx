@@ -3,10 +3,6 @@ import { Mutation } from '@apollo/react-components';
 import { LOGIN_USER } from './mutation';
 import Login from './Login';
 
-// const updateCache = (Cache, { data: { loginUser } }) => {
-// Cache.writeData({ data: { token: loginUser } });
-// localStorage.setItem('token', loginUser);
-// };
 console.log('LOGIN_USER', LOGIN_USER);
 export default () => (
   <Mutation mutation={LOGIN_USER}>

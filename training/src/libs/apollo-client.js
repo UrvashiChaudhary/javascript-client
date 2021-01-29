@@ -1,6 +1,6 @@
 // import/no-extraneous-dependencies
 import { InMemoryCache } from 'apollo-boost';
-import { ApolloClient } from 'apollo-client';
+import ApolloClient from 'apollo-client';
 import { HttpLink } from 'apollo-link-http';
 import { setContext } from '@apollo/client/link/context';
 

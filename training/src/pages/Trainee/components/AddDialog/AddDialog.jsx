@@ -6,7 +6,6 @@ import {
 import { Email, Person, VisibilityOff } from '@material-ui/icons';
 import { withStyles } from '@material-ui/core/styles';
 import schema from './Schema';
-import callApi from '../../../../libs/utils/api';
 import { snackbarContext } from '../../../../contexts/index';
 import Handler from './Handler';
 
@@ -51,34 +50,34 @@ class AddDialog extends React.Component {
     this.setState({ [key]: value });
   };
 
-  onClickHandler = async (data, openSnackBar) => {
-    this.setState({
-      loading: true,
-      hasError: true,
-    });
-    // eslint-disable-next-line react/prop-types
-    const { refetch } = this.props;
-    const response = await callApi(data, 'post', '/trainee');
-    this.setState({ loading: false });
-    if (response.statusText === 'OK') {
-      refetch();
-      this.setState({
-        hasError: false,
-        message: 'This is a success message',
-      }, () => {
-        const { message } = this.state;
-        openSnackBar(message, 'success');
-      });
-    } else {
-      this.setState({
-        hasError: false,
-        message: 'error in submitting',
-      }, () => {
-        const { message } = this.state;
-        openSnackBar(message, 'error');
-      });
-    }
-  }
+  // onClickHandler = async (data, openSnackBar) => {
+  //   this.setState({
+  //     loading: true,
+  //     hasError: true,
+  //   });
+  //   // eslint-disable-next-line react/prop-types
+  //   const { refetch } = this.props;
+  //   const response = await callApi(data, 'post', '/trainee');
+  //   this.setState({ loading: false });
+  //   if (response.statusText === 'OK') {
+  //     refetch();
+  //     this.setState({
+  //       hasError: false,
+  //       message: 'This is a success message',
+  //     }, () => {
+  //       const { message } = this.state;
+  //       openSnackBar(message, 'success');
+  //     });
+  //   } else {
+  //     this.setState({
+  //       hasError: false,
+  //       message: 'error in submitting',
+  //     }, () => {
+  //       const { message } = this.state;
+  //       openSnackBar(message, 'error');
+  //     });
+  //   }
+  // }
 
   hasErrors = () => {
     try {
@@ -131,7 +130,7 @@ class AddDialog extends React.Component {
 
   render() {
     const {
-      open, onClose, classes,
+      open, onClose, classes, onSubmit,
     } = this.props;
     // eslint-disable-next-line no-shadow
     const {
@@ -178,7 +177,7 @@ class AddDialog extends React.Component {
                     color="primary"
                     disabled={this.hasErrors()}
                     onClick={() => {
-                      this.onClickHandler({
+                      onSubmit({
                         name, email, password,
                       }, value);
                       this.formReset();
@@ -205,4 +204,5 @@ AddDialog.propTypes = {
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   classes: PropTypes.objectOf(PropTypes.string).isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };

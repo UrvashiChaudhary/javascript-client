@@ -15,8 +15,6 @@ import {
   CircularProgress,
 } from '@material-ui/core';
 import { Email, Person } from '@material-ui/icons';
-import callApi from '../../../../libs/utils/api';
-import { snackbarContext } from '../../../../contexts/index';
 
 const useStyles = () => ({
   button_color: {
@@ -96,37 +94,12 @@ class EditDialog extends Component {
     return !!iserror.length;
   };
 
-  onClickHandler = async (value, e) => {
-    this.setState({
-      loading: true,
-    });
-    const { originalId, name, email} = e;
-    const { loading } = this.state;
-    console.log('loaaaaadibng', loading);
-    const response = await callApi({id: originalId, name, email}, 'put', `/trainee`);
-    if (response !== 'undefined') {
-      this.setState({
-        message: 'Trainee Updated Successfully ',
-      }, () => {
-        const { message } = this.state;
-        value(message, 'success');
-      });
-    } else {
-      this.setState({
-        message: 'Error While Deleting',
-      }, () => {
-        const { message } = this.state;
-        value(message, 'error');
-      });
-    }
-  }
 
   render() {
     const {
       Editopen, handleEditClose, handleEdit, data, classes,
     } = this.props;
-    console.log('data', data);
-    const{ originalId } = data;
+    const{ originalId: id } = data;
     const { name, email, error, loading } = this.state;
     return (
       <div>
@@ -195,10 +168,8 @@ class EditDialog extends Component {
             <Button onClick={handleEditClose} color="primary">
               Cancel
             </Button>
-            <snackbarContext.Consumer>
-              {(value) => (
                 <Button
-                  onClick={() => this.onClickHandler(value, { name, email, originalId })}
+                  onClick={() => handleEdit({ name, email, id })}
                   className={
                     (name === data.name && email === data.email) || this.hasErrors()
                       ? classes.button_error
@@ -215,8 +186,6 @@ class EditDialog extends Component {
                   {loading && <span>Submitting</span>}
                   {!loading && <span>Submit</span>}
                 </Button>
-              )}
-            </snackbarContext.Consumer>
           </DialogActions>
         </Dialog>
       </div>

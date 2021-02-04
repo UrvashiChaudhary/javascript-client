@@ -10,7 +10,6 @@ import {
   Button,
   CircularProgress,
 } from '@material-ui/core';
-import callApi from '../../../../libs/utils/api';
 import { snackbarContext } from '../../../../contexts/index';
 
 class DeleteDialog extends Component {
@@ -22,33 +21,35 @@ class DeleteDialog extends Component {
     };
   }
 
-  onClickHandler = async (value, e) => {
+  onClickHandler = async (openSnackBar, e) => {
     this.setState({
       loading: true,
     });
-    const { rmdata } = this.props;
-    const response = await callApi(rmdata, 'delete', `/trainee?id=${rmdata.originalId}`);
+    const { deleteTrainee, refetch } = this.props;
+     const { originalId: id } = e;
+    const response = await deleteTrainee({variables: { id }});
     this.setState({ loading: false });
-    if (response.statusText === 'OK') {
+    if (response.data.rmdata !== 'undefined') {
+      refetch();
       this.setState({
         message: 'Deleted Successfully ',
       }, () => {
         const { message } = this.state;
-        value(message, 'success');
+        openSnackBar(message, 'success');
       });
     } else {
       this.setState({
         message: 'Error While Deleting',
       }, () => {
         const { message } = this.state;
-        value(message, 'error');
+        openSnackBar(message, 'error');
       });
     }
   }
 
   render() {
     const {
-      openRemove, onClose, deleteData,
+      openRemove, onClose, rmdata,
     } = this.props;
     const { loading } = this.state;
     return (
@@ -71,8 +72,8 @@ class DeleteDialog extends Component {
               Cancel
             </Button>
             <snackbarContext.Consumer>
-              {({value}) => (
-                <Button onClick={() => this.onClickHandler(value, deleteData)
+              {(value) => (
+                <Button onClick={() => this.onClickHandler(value, rmdata)
                 }
                 >
                   {loading && (

@@ -50,35 +50,6 @@ class AddDialog extends React.Component {
     this.setState({ [key]: value });
   };
 
-  // onClickHandler = async (data, openSnackBar) => {
-  //   this.setState({
-  //     loading: true,
-  //     hasError: true,
-  //   });
-  //   // eslint-disable-next-line react/prop-types
-  //   const { refetch } = this.props;
-  //   const response = await callApi(data, 'post', '/trainee');
-  //   this.setState({ loading: false });
-  //   if (response.statusText === 'OK') {
-  //     refetch();
-  //     this.setState({
-  //       hasError: false,
-  //       message: 'This is a success message',
-  //     }, () => {
-  //       const { message } = this.state;
-  //       openSnackBar(message, 'success');
-  //     });
-  //   } else {
-  //     this.setState({
-  //       hasError: false,
-  //       message: 'error in submitting',
-  //     }, () => {
-  //       const { message } = this.state;
-  //       openSnackBar(message, 'error');
-  //     });
-  //   }
-  // }
-
   hasErrors = () => {
     try {
       schema.validateSync(this.state);

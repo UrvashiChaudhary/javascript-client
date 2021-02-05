@@ -13,6 +13,7 @@ import { TableComponent } from '../../components';
 import { GET_TRAINEE} from './query';
 import { UPDATE_TRAINEE, CREATE_TRAINEE } from './Mutation';
 import { snackbarContext } from '../../contexts';
+import { DELETED_TRAINEE_SUB, UPDATED_TRAINEE_SUB } from './Subscription';
 
 const useStyles = (theme) => ({
   root: {
@@ -111,9 +112,9 @@ class TraineeList extends React.Component {
     this.setState({
       RemoveOpen: false,
     });
-    console.log('value trainee', value);
+    // console.log('value trainee', value);
     // eslint-disable-next-line no-console
-    console.log('Deleted Item ', deleteData);
+    // console.log('Deleted Item ', deleteData);
     const { createdAt } = deleteData;
     const isAfter = moment(createdAt).isSameOrAfter('2019-02-14T18:15:11.778Z');
     const message = isAfter
@@ -174,6 +175,72 @@ class TraineeList extends React.Component {
     }
     )
   }
+
+  componentDidMount = () => {
+    const { data: { subscribeToMore } } = this.props;
+    subscribeToMore({
+      document: UPDATED_TRAINEE_SUB,
+      updateQuery: (prev, { subscriptionData }) => {
+        if (!subscriptionData) return prev;
+        console.log('prevvvvv', prev);
+        // const { getAllTrainees: { ...record } } = prev;
+        const { getAllTrainees: {record}} = prev;
+        console.log('record-------', record);
+        // for (const i in record){
+        //   console.log('jjjjj', record[i].originalId);
+        // }
+        // console.log(...record);
+        // const a = record[0];
+        // console.log('11111111111111111111111111', a);
+        const { data: { traineeUpdated } } = subscriptionData;
+        // console.log('22222', typeof(traineeUpdated.data1[0].originalId));
+        // console.log('traineeeeeeeeeeeeUpdated', traineeUpdated.traineeUpdated.data1[0].originalId);
+        console.log('subscription data**********', subscriptionData);
+        const updatedRecords = [record].map((records) => {
+
+          for (const i in records){
+            if (records[i].originalId === traineeUpdated.data1[0].originalId) {
+              console.log('found match ');
+              return {
+                records,
+                ...traineeUpdated.data1[0],
+              };
+            }
+          }
+          return records;
+        //  console.log('lasssssssssssssssst', records);
+        });
+        console.log('4444444', traineeUpdated.data1[0]);
+        console.log('333333333', updatedRecords);
+        return {
+          getAllTrainees: {
+            ...prev.getAllTrainees,
+            ...prev.getAllTrainees.traineeCount,
+            record: updatedRecords,
+          },
+        };
+      },
+    });
+    subscribeToMore({
+      document: DELETED_TRAINEE_SUB,
+      updateQuery: (prev, { subscriptionData }) => {
+        if (!subscriptionData) return prev;
+        const { getAllTrainees: { record } } = prev;
+        const { data: { traineeDeleted } } = subscriptionData;
+        console.log(' sub delete : ', traineeDeleted.data.originalId);
+        // eslint-disable-next-line max-len
+        const updatedRecords = [...record].filter((records) => records.originalId !== traineeDeleted.data.originalId);
+        return {
+          getAllTrainees: {
+            ...prev.getAllTrainees,
+            ...prev.getAllTrainees.TraineeCount - 1,
+            record: updatedRecords,
+          },
+        };
+      },
+    });
+  }
+
 
 
 

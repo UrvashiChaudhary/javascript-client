@@ -2,7 +2,13 @@ import { gql } from 'apollo-boost';
 
 const DELETE_TRAINEE = gql`
 mutation Deletetrainee($id: ID!) {
-    deleteTrainee(payLoad: {id: $id} )
+  deleteTrainee(payLoad: {id: $id} ){
+    status
+    message
+    data{
+      originalId
+    }
+  }
 }
 `;
 

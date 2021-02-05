@@ -31,7 +31,7 @@ function TableComponent(props) {
     classes, data, column, order, orderBy, onSort, onSelect, count, page, actions,
     rowsPerPage, onChangePage, onChangeRowsPerPage,
   } = props;
-  console.log(' data :', data);
+  // console.log(' data :', data);
 
   return (
     <TableContainer component={Paper}>

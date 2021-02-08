@@ -7,7 +7,11 @@ subscription {
     data1{
     name,
     originalId,
-    email
+    email,
+    role,
+    password,
+    _id,
+    createdAt,
   }
   }
   }

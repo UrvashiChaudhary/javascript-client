@@ -182,45 +182,29 @@ class TraineeList extends React.Component {
       document: UPDATED_TRAINEE_SUB,
       updateQuery: (prev, { subscriptionData }) => {
         if (!subscriptionData) return prev;
-        console.log('prevvvvv', prev);
-        // const { getAllTrainees: { ...record } } = prev;
         const { getAllTrainees: {record}} = prev;
-        console.log('record-------', record);
-        // for (const i in record){
-        //   console.log('jjjjj', record[i].originalId);
-        // }
-        // console.log(...record);
-        // const a = record[0];
-        // console.log('11111111111111111111111111', a);
-        const { data: { traineeUpdated } } = subscriptionData;
-        // console.log('22222', typeof(traineeUpdated.data1[0].originalId));
-        // console.log('traineeeeeeeeeeeeUpdated', traineeUpdated.traineeUpdated.data1[0].originalId);
-        console.log('subscription data**********', subscriptionData);
+        const { data: { traineeUpdated: { data1 } = {} } = {} } = subscriptionData;
+        const newTraineeUpdated = [];
         const updatedRecords = [record].map((records) => {
-
           for (const i in records){
-            if (records[i].originalId === traineeUpdated.data1[0].originalId) {
-              console.log('found match ');
-              return {
-                records,
-                ...traineeUpdated.data1[0],
-              };
+            if (!(records[i].originalId === data1[0].originalId)) {
+              newTraineeUpdated.push(record[i]);
             }
           }
-          return records;
-        //  console.log('lasssssssssssssssst', records);
+          return record;
+
         });
-        console.log('4444444', traineeUpdated.data1[0]);
-        console.log('333333333', updatedRecords);
+        newTraineeUpdated.push(...data1);
+        console.log('updatedRecords', updatedRecords);
         return {
           getAllTrainees: {
             ...prev.getAllTrainees,
-            ...prev.getAllTrainees.traineeCount,
-            record: updatedRecords,
+            record: newTraineeUpdated
           },
         };
       },
     });
+
     subscribeToMore({
       document: DELETED_TRAINEE_SUB,
       updateQuery: (prev, { subscriptionData }) => {
@@ -230,10 +214,11 @@ class TraineeList extends React.Component {
         console.log(' sub delete : ', traineeDeleted.data.originalId);
         // eslint-disable-next-line max-len
         const updatedRecords = [...record].filter((records) => records.originalId !== traineeDeleted.data.originalId);
+
         return {
           getAllTrainees: {
             ...prev.getAllTrainees,
-            ...prev.getAllTrainees.TraineeCount - 1,
+            ...prev.getAllTrainees.traineeCount - 1,
             record: updatedRecords,
           },
         };
